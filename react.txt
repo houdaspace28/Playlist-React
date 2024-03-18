@@ -1,0 +1,179 @@
+-REACT  is a JS library, a library is a collectiion of pre-written code that provides specific functionality. REACT is primarly built using JS.
+
+-React is based on components.
+
+-A COMPONENT is self-contained section of code that contains a reusable building block. (think of a component as a lego piece)
+
+-React uses a syntax extension from JS known as JSX, JSX allows to write html like code within your JS files.
+
+-React uses a virtual DOM.
+
+-nodejs is a back-end JS runtime environment, it executes a JS code outside of a web browser.
+
+-the node modules folder contains external libraries and packages that our project relies on.
+
+-main.jsx is kind of our main JS file.
+
+-the app component (app.jsx) is the root component, it bundles all other components.
+
+//HOW TO STYLE react COMPONENTS WITH CSS
+
+1)External.(index.css)
+
+2)MODULES: we basically create a folder in the src folder and we name it
+as our component we move the component.jsx file to it, we create a 
+component.module.css and we import it the the component.jsx file using:
+"import styles from './component.module.css' " and in the className of the
+component we write className={styles.button}.
+
+3)INLINE: inside our component function before return we declare a JS object
+(styles) and we set our css properties and then inside the return statement 
+in our tage we set the style property to be like :style={styles}
+
+//PROPS
+-they are properties shared between components. A parent component can 
+send data to a child component.
+
+-in the component-jsx file we pass 'props' as a parameter to the component:
+
+ import PropTypes from 'prop-types'
+ function Student(props){
+    return(
+   <div>
+       <p>Name: {props.name}</p>
+       <p>Name: {props.age}</p>
+       <p>Name: {props.isStudent ? true :false}</p>
+   </div>
+
+  );
+  }
+
+
+and then in the app.jsx file:
+
+   function App(){
+       return(
+                <>
+                <Student name="Spongebob" age={30} isStudent={true} />
+                <Student/> //here default props will be used
+                </>
+
+             );
+          Student.propTypes={
+                     name: PropTypes.string,
+                     age: PropTypes.number,
+                     isStudent: PropTypes.bool,
+
+                     }
+          Student.defaultProps={
+                    name: "Guest",
+                    age: 24,
+                    isStudent: true,
+                   }
+                 }
+
+-propTypes: a mechanism that ensures that the passed value is of the correct
+datatype.
+-defaultProps.
+
+//CONDITIONAL RENDERING
+-allows u to render what u want in ur application based on a condition
+(show, hide, or change component)
+
+//CLICK EVENTS
+
+-when a user clicks on a specific lement, we can respond to the click by passing a callback to the onClik event handler.
+
+-with click events, we are automatically provided with an event parameter.
+
+-onDoubleClick
+
+-event.target gets you the element that is subject to the event (click for example).
+
+//useState()
+
+-React hook: special function that allows functional components to use React features without writing class components.
+
+-useState()= a react hook that allows the creation of a stateful variable and a setter function to update its value in the virtual DOM.
+
+-useState(): re-renders the component when the state value changes.
+
+-import React, {useState} from 'react';
+
+- the useState hook returns an array of a variable and a setter function.
+
+-Example: counter.jsx:
+  import React, {useState} from 'react';
+  function Counter(){
+    const [count,setCount]= useState(0);
+    const increment = ()=>{
+      setCount(count+1);
+    };
+
+    const decrement =()=>{
+      setCount(count-1);
+    };
+
+    const reset =()=>{
+      setCount(0);
+    };
+
+    return(
+     <div>
+     <p>{count}</p>
+     <button onClick={increment}>Increment</button>
+     <button onClick={decrement}>Decrement</button>
+     <button onClick={reset}>Reset</button>
+     </div>
+
+    );
+  }
+  export default Counter
+
+  //onChange
+
+  -an event handler used primarly with form elements,it triggers a function everytime the value of the input changes.
+
+  //UPDATER FUNCTION
+  -Its a function passed as an argument to the setState() (usually an arrow function).
+
+
+//useEffect()
+-its a react hook that tells react to do some code when: 
+->this somponent re-renders.
+->this component mounts.
+->the state of a value.
+
+-useEffect(function , [dependencies])
+
+-useEffect(()=> {}), runs after every re-render.
+
+-useEffect(()=>{}, []): runs only on mount.
+
+-useEffect(()=>{}, [value]): runs on mount and when value changes.
+
+-return statement with useEffect to do cleanup before the next re-render.
+
+//useContext()
+-a react hook that allows you to share values between multiple levels of components without passing props through each level.
+
+-provider component: the component that has the data we want to pass:
+1) import {createContext} from 'react'
+2)export const myContext=createContext();
+3)<myContext.Provider value={value}>
+<Child/>
+</myContext.Provider>
+
+-consumer component:
+1)import {useContext} from 'react'
+2)import {myContext} from provider component.
+3)const value = useContext(myContext);
+
+//useRef()
+-like useState, but doesnt re-render when value changes, actually when u want a component to remember some information but u dont that information to trigger a re-render.
+
+- const ref =useRef(0); the useRef hook returns a ref object with one property which is 'current'. in the example we are setting ref.current's initial value to 0.
+
+-the current property can also refer to an html element.
+
+
